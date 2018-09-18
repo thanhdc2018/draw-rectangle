@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>draw-rectangle</title>
+</head>
+<tr>
+    <td>
+        Let's draw a rectangle:
+    </td>
+</tr>
+<tr>
+    <td><input id= "height" type="number">HEIGHT</td>
+    <td><input id= "width" type="number">WIDTH</td>
+    <td>
+        <input type = "button" onclick = "draw()" value = "DRAW">
+    </td>
+    <td>
+        <p id="output"></p>
+    </td>
+</tr>
+<canvas id="myCanvas"style="border:1px solid #000000;">
+</canvas>
+<body>
+<script>
+    let canvas = document.querySelector("canvas");
+    canvas.width = 600; //window.innerWidth;
+    canvas.height = 400; //window.innerHeight;
+    let ctx = canvas.getContext("2d");
+    const COLOR = {
+        BLACK: "#000",
+        WHITE: "#FFF",
+        RED: "#F00",
+        GREEN: "#0F0",
+        BLUE: "#00F",
+        YELLOW: "#FF0"
+    }
+    let Rec = function(a,b){
+        this.x = 150;
+        this.y = 100;
+        this.lw = 50;
+        this.a = a || 150;
+        this.b = b || 100;
+        this.area = function(){
+            let area1 = a*b;
+            return area1;
+        }
+    }
+
+    function drawRec (rec){
+
+        document.getElementById("myCanvas").width = 600;
+        document.getElementById("myCanvas").height = 400;
+        ctx.beginPath();
+        ctx.lineWidth = this.lw;
+        ctx.rect(rec.x,rec.y,rec.a,rec.b);
+        ctx.fillStyle = COLOR.RED;
+        ctx.strokeStyle = COLOR.YELLOW;
+        ctx.stroke();
+        ctx.fill();
+    }
+
+    function show(Rec){
+            let show = "Heigth  " + Rec.a + "  Width " + Rec.b +" ;  area =  "+ Rec.area();
+            document.getElementById("output").innerHTML = show;
+    }
+    // let rec1 = new Rec(300,200);
+    // drawRec(rec1);
+
+    function draw(){
+        let a = document.getElementById("height");
+        a = parseInt(a.value);
+        let b = document.getElementById("width");
+        b = parseInt(b.value);
+        let rect = new Rec(a,b);
+        drawRec(rect);
+        show(rect);
+    }
+</script>
+</body>
+</html>
